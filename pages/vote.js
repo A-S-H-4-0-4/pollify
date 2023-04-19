@@ -250,8 +250,6 @@ const Vote = () => {
       .catch((error) => {
         // console.log(error);
         // toast.error("Try again in some time");
-        setShowPhoneverified(true)
-        setShowOTP(false);
       });
 
   }
