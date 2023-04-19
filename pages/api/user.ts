@@ -14,9 +14,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (method === "GET") {
         let responseObject: ResponseType;
         try {
-            const result = await prisma.User.findFirst({
+            const result = await prisma.user.findFirst({
                 where: {
-                    phoneNumber: phoneNumber
+                    phoneNumber: (phoneNumber === undefined || phoneNumber === null) ? "" : phoneNumber+"",
                 },
                 select: {
                     phoneNumber: true
@@ -51,7 +51,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 adharNo,
                 candidateName,
                 candidateId } = body
-            const result = await prisma.User.create({
+            const result = await prisma.user.create({
                 data: {
                     fullName: fullName,
                     phoneNumber: phoneNumber,

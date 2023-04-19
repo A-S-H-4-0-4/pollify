@@ -12,8 +12,8 @@ const Detail = ({ callback, topic, details }) => {
       <CloseIcon color="error" sx={{ marginLeft: "95%", cursor: "pointer", marginTop: "20px", fontSize: "30px" }} onClick={callback} />
       <div className={D.container}>
         <h1 className={D.topic}>{topic}</h1>
-        {details && details.map((object) => {
-          return <p className={D.details}>{object}</p>;
+        {details && details.map((object,index) => {
+          return <p className={D.details} key={index} >{object}</p>;
         })}
       </div>
     </div>
