@@ -112,7 +112,8 @@ export const callAPI = async (API: string, params: object | null = null, method:
     // return result
 
   } catch (error) {
-    return error
+    console.log(error);
+    
   }
 
 }
