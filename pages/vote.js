@@ -1,7 +1,7 @@
 
 // import styleSheet
 import styles from "../styles/vote.module.css";
-import H from "../styles/home.module.css";
+import H from "../styles/Home.module.css";
 import UD from "../styles/components/userDetail.module.css"
 // next Image
 import Image from 'next/image';
@@ -266,7 +266,7 @@ const Vote = () => {
         < div className={H.contentBox} style={{ justifyContent: "space-between" }} >
           {/* navbar */}
           <div className={H.navbar} style={{ borderBottom: "1px solid #ccc" }} >
-            <img src={logo} style={{ height: "60px", marginLeft: "10%" }} />
+            <Image src={logo} style={{ height: "60px", marginLeft: "10%" }} alt="" />
 
             <div className={H.navbarTitle}>
               <span onClick={() => { router.push("/home") }} >Home</span>
