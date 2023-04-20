@@ -17,8 +17,8 @@ import Button from '@mui/material/Button'
 import Detail from '../components/detail';
 // next router
 import { useRouter } from "next/router";
-// next Image
-import Image from 'next/image';
+// next img
+import img from 'next/image';
 
 
 
@@ -89,7 +89,7 @@ const Home = () => {
         < div className={H.contentBox}>
           {/* navbar */}
           <div className={H.navbar}>
-            <Image src={logo} style={{ height: "60px", marginLeft: "10%" }} alt="" />
+            <img src={logo} style={{ height: "60px", marginLeft: "10%" }} alt="" />
 
             <div className={H.navbarTitle}>
               <span style={{ color: "#2791d4" }}>Home</span>
@@ -98,9 +98,9 @@ const Home = () => {
               <span onClick={()=>{router.push("/vote")}} >Vote</span>
             </div>
           </div>
-          {/* banner Image */}
+          {/* banner img */}
           <div className={H.bannerImg} style={{ height: "700px", marginTop: "100px", position: "relative" }}>
-            <Image src={bannerImg} style={{ height: "100%", width: "100%", objectFit: "cover" }} alt="" />
+            <img src={bannerImg} style={{ height: "100%", width: "100%", objectFit: "cover" }} alt="" />
             <div className={H.bannerBox}>
               <span style={{ fontSize: "20px", fontWeight: "bold", marginTop: "30px" }}>
                 Inclusive voting for all your fingerprint is your key
@@ -119,11 +119,11 @@ const Home = () => {
               <h2 style={{ marginTop: "15%" }}>Who is elegible for vote</h2>
               <Button variant="outlined" color="inherit" sx={{ marginTop: "5%", fontWeight: "bold" }} onClick={() => { setLearnBox(true); setDetails(eligibilityCriteria); setTopic("Who is elegible for vote") }} >Learn More</Button>
             </div>
-            <Image src={thinkingThaught} style={{ height: "100%", width: "50%", objectFit: "cover" }} alt="" />
+            <img src={thinkingThaught} style={{ height: "100%", width: "50%", objectFit: "cover" }} alt="" />
           </div>
           {/* learn more block 2 */}
           <div className={H.learnBlock}>
-            <Image src={register} style={{ height: "100%", width: "50%", objectFit: "cover" }} alt=""/>
+            <img src={register} style={{ height: "100%", width: "50%", objectFit: "cover" }} alt=""/>
             <div style={{ height: "100%", width: "50%", display: "flex", alignItems: "center", flexDirection: "column", backgroundColor: "#359ada" }} >
               <h2 style={{ marginTop: "15%" }}>How to vote</h2>
               <Button variant="outlined" color="inherit" sx={{ marginTop: "5%", fontWeight: "bold" }} onClick={() => { setLearnBox(true); setDetails(voteContent); setTopic("How to vote") }} >Learn More</Button>
@@ -135,7 +135,7 @@ const Home = () => {
               <h2 style={{ marginTop: "15%", display: "flex", justifyContent: "center" }}>understand who you are voting for</h2>
               <Button variant="outlined" color="inherit" sx={{ marginTop: "5%", fontWeight: "bold" }} onClick={() => { setLearnBox(true); setDetails(votingFor); setTopic("understand who you are voting for") }}>Learn More</Button>
             </div>
-            <Image src={booth} style={{ height: "100%", width: "50%", objectFit: "cover" }} alt="" />
+            <img src={booth} style={{ height: "100%", width: "50%", objectFit: "cover" }} alt="" />
           </div>
           <div className={H.vote}>
             <h3>Click here to vote</h3>

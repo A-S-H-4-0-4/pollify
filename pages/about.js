@@ -15,8 +15,8 @@ const booth = "/images/img3.jpg"
 import Button from "@mui/material/Button"
 // next router
 import { useRouter } from "next/router";
-// next Image
-import Image from 'next/image';
+// next img
+import img from 'next/image';
 
 // Home Function
 const About = () => {
@@ -30,7 +30,7 @@ const About = () => {
         < div className={H.contentBox} style={{justifyContent:"space-between"}} >
           {/* navbar */}
           <div className={H.navbar} style={{ width: "75%",borderBottom:"1px solid #ccc" }} >
-            <Image src={logo} style={{ height: "60px", marginLeft: "10%" }} alt="logo" />
+            <img src={logo} style={{ height: "60px", marginLeft: "10%" }} alt="logo" />
 
             <div className={H.navbarTitle}>
               <span onClick={() => { router.push("/home") }} >Home</span>

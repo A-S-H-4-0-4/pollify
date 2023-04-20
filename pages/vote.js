@@ -3,8 +3,8 @@
 import styles from "../styles/vote.module.css";
 import H from "../styles/Home.module.css";
 import UD from "../styles/components/userDetail.module.css"
-// next Image
-import Image from 'next/image';
+// next img
+import img from 'next/image';
 // next Head
 import Head from 'next/head'
 // react
@@ -276,7 +276,7 @@ const Vote = () => {
         < div className={H.contentBox} style={{ justifyContent: "space-between" }} >
           {/* navbar */}
           <div className={H.navbar} style={{ borderBottom: "1px solid #ccc" }} >
-            <Image src={logo} style={{ height: "60px", marginLeft: "10%" }} alt="" />
+            <img src={logo} style={{ height: "60px", marginLeft: "10%" }} alt="" />
 
             <div className={H.navbarTitle}>
               <span onClick={() => { router.push("/home") }} >Home</span>
@@ -301,7 +301,7 @@ const Vote = () => {
                     onChange={handleCandidateSelect}
                     className={styles.radio}
                   />
-                  <Image
+                  <img
                     src={candidate.photo}
                     alt={`${candidate.name} photo`}
                     width={150}
