@@ -24,7 +24,8 @@ import { auth } from "../firebaseConfig"
 import { toast, Toaster } from "react-hot-toast";
 // call api
 import { callAPI } from "../api/api";
-
+// components
+import Loader from "../components/loader";
 
 // candidate list
 const candidates = [
@@ -67,13 +68,16 @@ const Vote = () => {
   const [showOTP, setShowOTP] = useState(false);
   const [showPhoneverified, setShowPhoneverified] = useState(false);
   const [voted, setVoted] = useState(false);
+  const [loader, setLoader] = useState(false);
 
 
 
   const handleUserDetails = async (fields) => {
+    setLoader(true)
     const response = await callAPI(
-      `http://localhost:3000/api/user?ph=${fields.phoneNumber}`
+      `https://pollify-orcin.vercel.app/api/user?ph=${fields.phoneNumber}`
     );
+    setLoader(false);
     const { message, data, errors } = response;
     if (message === "success") {
       if (typeof data === "object") {
@@ -130,10 +134,12 @@ const Vote = () => {
         candidateName: candidateName,
         candidateId: selectedCandidateId
       };
+      setLoader(true);
       const response = await callAPI(
         'user',
         params
       );
+      setLoader(false);
       const { message, data, errors } = response;
       if (message === "success") {
         if (typeof data === "object") {
@@ -237,6 +243,7 @@ const Vote = () => {
   }
 
   const otpSend = () => {
+    setLoader(true)
     onCaptchVerify();
     const appVerifier = window.recaptchaVerifier;
     const ph = "+91" + phoneNumber;
@@ -246,10 +253,12 @@ const Vote = () => {
         toast.success("OTP sended successfully!");
         setShowOTP(true);
         setShowPhoneverified(false)
+        setLoader(false);
       })
       .catch((error) => {
         // console.log(error);
         // toast.error("Try again in some time");
+        setLoader(false);
       });
 
   }
@@ -261,6 +270,7 @@ const Vote = () => {
       </Head>
       {showPhoneverified && verifyPhoneNumber()}
       <Toaster toastOptions={{ duration: 4000 }} />
+      {loader && <Loader />}
       <div id="recaptcha-container"></div>
       <div className={H.screen} style={{ height: "auto" }} >
         < div className={H.contentBox} style={{ justifyContent: "space-between" }} >
