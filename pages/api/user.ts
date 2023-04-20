@@ -6,7 +6,7 @@ interface ResponseType {
     data: {};
     errors: Array<{}>;
 }
-const userFunction = async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
     const { method, body, query } = req;
     const { phoneNumber } = query 
     console.log(phoneNumber);
@@ -83,4 +83,3 @@ const userFunction = async (req: NextApiRequest, res: NextApiResponse) => {
 
 };
 
-export default userFunction;
