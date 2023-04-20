@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 // import App from "next/app";
-const BaseUrl: string = "https://pollify-orcin.vercel.app/api/"
+const BaseUrl: string = "http://localhost:3000/api/"
 
 export enum methods {
   GET, POST, PUT, DELETE
