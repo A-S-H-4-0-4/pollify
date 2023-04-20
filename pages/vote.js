@@ -75,7 +75,7 @@ const Vote = () => {
   const handleUserDetails = async (fields) => {
     setLoader(true)
     const response = await callAPI(
-      `https://pollify-orcin.vercel.app/api/user?ph=${fields.phoneNumber}`
+      `https://pollify-orcin.vercel.app/api/user?phoneNumber=${fields.phoneNumber}`
     );
     setLoader(false);
     const { message, data, errors } = response;
