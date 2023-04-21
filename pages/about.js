@@ -4,8 +4,6 @@ import H from "../styles/Home.module.css";
 import Head from "next/head"
 // react
 import React, { useEffect, useState } from "react";
-// logo
-const logo = "/icons/logo.png"
 // Images
 const bannerImg = "/images/bannerImage.jpeg"
 const thinkingThaught = "/images/img1.jpeg"
@@ -30,8 +28,7 @@ const About = () => {
         < div className={H.contentBox} style={{justifyContent:"space-between"}} >
           {/* navbar */}
           <div className={H.navbar} style={{ width: "75%",borderBottom:"1px solid #ccc" }} >
-            <img src={logo} style={{ height: "60px", marginLeft: "10%" }} alt="logo" />
-
+            <h3>Pollify</h3>
             <div className={H.navbarTitle}>
               <span onClick={() => { router.push("/home") }} >Home</span>
               {/* <span>Learn</span> */}

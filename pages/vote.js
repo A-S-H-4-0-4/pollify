@@ -69,6 +69,7 @@ const Vote = () => {
   const [showPhoneverified, setShowPhoneverified] = useState(false);
   const [voted, setVoted] = useState(false);
   const [loader, setLoader] = useState(false);
+  const [confirmVote, setConfirmVote] = useState(false);
 
 
 
@@ -102,17 +103,17 @@ const Vote = () => {
 
   const handleCandidateSelect = (event) => {
     setSelectedCandidateId(Number(event.target.value));
-    if (selectedCandidateId) {
-      if (selectedCandidateId === 1) {
+    if (Number(event.target.value)) {
+      if (Number(event.target.value) === 1) {
         setCandidateName("Muskan Yadav")
       }
-      else if (selectedCandidateId === 2) {
+      else if (Number(event.target.value) === 2) {
         setCandidateName("Nirmal Chaudhary")
       }
-      else if (selectedCandidateId === 3) {
+      else if (Number(event.target.value) === 3) {
         setCandidateName("Siddhanth Pareek")
       }
-      else if (selectedCandidateId === 4) {
+      else if (Number(event.target.value) === 4) {
         setCandidateName("Gaurav Soni")
       }
     }
@@ -121,6 +122,7 @@ const Vote = () => {
   // Handle vote submission logic here
   const handleVoteSubmit = async (event) => {
     event.preventDefault();
+    setConfirmVote(false);
     if (selectedCandidateId === null) alert("please select a candidate");
     else {
       const params = {
@@ -165,7 +167,7 @@ const Vote = () => {
     }
     return (
       <div className={UD.glass}>
-        <div className={styles.pBox}>
+        <div className={styles.pBox} style={{marginTop:"20%"}} >
           <span> Verify your phone number.</span>
           <input
             className={styles.input}
@@ -208,7 +210,7 @@ const Vote = () => {
 
     return (
       <div className={UD.glass}>
-        <div className={styles.pBox}>
+        <div className={styles.pBox} style={{marginTop:"20%"}} >
           <span> Enter OTP</span>
           <input
             className={styles.input}
@@ -251,9 +253,9 @@ const Vote = () => {
       .then((confirmationResult) => {
         window.confirmationResult = confirmationResult;
         toast.success("OTP sended successfully!");
-        setShowOTP(true);
         setShowPhoneverified(false)
         setLoader(false);
+        setShowOTP(true);
       })
       .catch((error) => {
         // console.log(error);
@@ -276,7 +278,7 @@ const Vote = () => {
         < div className={H.contentBox} style={{ justifyContent: "space-between" }} >
           {/* navbar */}
           <div className={H.navbar} style={{ borderBottom: "1px solid #ccc" }} >
-            <img src={logo} style={{ height: "60px", marginLeft: "10%" }} alt="" />
+            <h3>Pollify</h3>
 
             <div className={H.navbarTitle}>
               <span onClick={() => { router.push("/home") }} >Home</span>
@@ -290,7 +292,7 @@ const Vote = () => {
 
           <div className={styles.container}>
             <h1 className={styles.title}>Vote for your favorite candidate</h1>
-            <form className={styles.form} onSubmit={handleVoteSubmit}>
+            <div className={styles.form} >
               {candidates.map((candidate) => (
                 <label key={candidate.id} className={styles.label}>
                   <input
@@ -314,10 +316,11 @@ const Vote = () => {
               <button
                 type="submit"
                 className={styles.button}
+                onClick={() => { setConfirmVote(true) }}
               >
                 Submit Vote
               </button>
-            </form>
+            </div>
           </div>
 
           <div className={H.footer} style={{ marginTop: "5%" }} >
@@ -329,13 +332,22 @@ const Vote = () => {
         submit={handleUserDetails}
       />}
       {showOTP && verifyOtp()}
-      {voted && <div className={UD.glass}>
-        <div className={styles.pBox}>
+      { voted && <div className={UD.glass}>
+        <div className={styles.pBox}  style={{width: "33%",marginTop:"20%"}}>
           <span> Your vote is saved successfully!!. </span>
           <Button variant="contained" onClick={() => { router.push("/home") }} >Go to Home</Button>
         </div>
       </div>
       }
+      { confirmVote && <div className={UD.glass}>
+        <div className={styles.pBox} style={{width: "33%",marginTop:"20%"}} >
+          <span> You choose "{candidateName}" as your candidate. Are you sure you wanna proceed?. </span>
+          <div style={{width: '100%',display: 'flex', justifyContent:"space-evenly"}} >
+            <Button variant="contained" onClick={() => { setConfirmVote(false) }} >Change candidate</Button>
+            <Button variant="contained" onClick={handleVoteSubmit} >Submit</Button>
+          </div>
+        </div>
+      </div>}
     </React.Fragment>
   )
 }

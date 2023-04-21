@@ -2,17 +2,16 @@
   background: rgba(36, 30, 22, 0.8);
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   align-items: center;
   position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
-  z-index: 200;
+  z-index: 250;
   width: 100vw;
   height: 100vh;
-  overflow:scroll;
+  overflow: scroll;
   overflow-x: hidden;
 }
 
@@ -87,9 +86,10 @@
   }
 }
 
-.glass h1{
-color: #2791d4;
-font-family: "Open Sans", Helvetica, Arial, sans-serif;
-text-transform: uppercase;
-letter-spacing: .4rem;
+.glass h1 {
+  color: #2791d4;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .4rem;
+  margin-top: 40px;
 }

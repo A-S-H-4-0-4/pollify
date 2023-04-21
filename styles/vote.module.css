@@ -106,6 +106,8 @@ color: black;
   font-weight: 700;
   letter-spacing: .2rem;
   font-size: 22px;
+  display: flex;
+  margin-left:5%
 }
 
 .pBox input{

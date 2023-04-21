@@ -89,7 +89,7 @@ const Home = () => {
         < div className={H.contentBox}>
           {/* navbar */}
           <div className={H.navbar}>
-            <img src={logo} style={{ height: "60px", marginLeft: "10%" }} alt="" />
+          <h3>Pollify</h3>
 
             <div className={H.navbarTitle}>
               <span style={{ color: "#2791d4" }}>Home</span>
