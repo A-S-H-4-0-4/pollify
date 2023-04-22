@@ -3,18 +3,13 @@
 import styles from "../styles/vote.module.css";
 import H from "../styles/Home.module.css";
 import UD from "../styles/components/userDetail.module.css"
-// next img
-import img from 'next/image';
+import D from "../styles/components/detail.module.css";
 // next Head
 import Head from 'next/head'
 // react
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // mui
 import Button from '@mui/material/Button'
-// mui icons
-import CloseIcon from '@mui/icons-material/Close';
-// logo
-const logo = "/icons/logo.png"
 // next router
 import { useRouter } from "next/router";
 // firebase
@@ -52,6 +47,22 @@ const candidates = [
 ];
 
 
+// instructions
+const instructions = [
+  "1. Make sure you are eligible to vote and are registered as a student at the institution.",
+
+  "2. Make sure your device has a proper internet connection.",
+
+  "3.  You need to fill in your required ID details properly.",
+
+  "4. You need to have your mobile phone with you to verify yourself with the OTP sent on your phone number.",
+  "5.  Review the list of candidates carefully.",
+  "6. Select the candidate that you wish to vote for by clicking the corresponding button.",
+  "7.  Before submitting your vote, make sure to review your selections and confirm your choices.",
+  "8. After confirming your vote, submit your selections by clicking the 'submit' button.",
+  "9. If you encounter any issues or concerns during the online voting process, follow the contact details.",
+  '10. Now, click on the "Vote now" button.'
+];
 
 
 //  Vote Function
@@ -70,6 +81,7 @@ const Vote = () => {
   const [voted, setVoted] = useState(false);
   const [loader, setLoader] = useState(false);
   const [confirmVote, setConfirmVote] = useState(false);
+  const [instruction, setInstruction] = useState(true);
 
 
 
@@ -88,7 +100,7 @@ const Vote = () => {
         }
         else {
           setUserData(fields)
-          setUserRegistered(true);
+          setUserRegistered(false);
           setShowPhoneverified(true);
           setPhoneNumber(fields.phoneNumber)
         }
@@ -167,7 +179,7 @@ const Vote = () => {
     }
     return (
       <div className={UD.glass}>
-        <div className={styles.pBox} style={{marginTop:"20%"}} >
+        <div className={styles.pBox} style={{ marginTop: "20%" }} >
           <span> Verify your phone number.</span>
           <input
             className={styles.input}
@@ -186,7 +198,8 @@ const Vote = () => {
   const verifyOtp = () => {
 
     const reSendOtp = () => {
-      otpSend();
+      if (phoneNumber.trim != "" && phoneNumber.length === 10)
+        otpSend();
     }
     const handleOtp = () => {
       if (otp && otp.length === 6) {
@@ -198,8 +211,11 @@ const Vote = () => {
             setShowPhoneverified(false)
           })
           .catch((err) => {
-            console.log(err);
-            console.log("error");
+            console.log(err.code);
+            if (err.code === "auth/code-expired") { toast.error("Opt expired. Click on resend otp") }
+            if (err.code === "auth/invalid-verification-code") {
+              toast.error("Please enter correct otp")
+            }
           });
       }
       else {
@@ -210,13 +226,13 @@ const Vote = () => {
 
     return (
       <div className={UD.glass}>
-        <div className={styles.pBox} style={{marginTop:"20%"}} >
+        <div className={styles.pBox} style={{ marginTop: "20%" }} >
           <span> Enter OTP</span>
           <input
             className={styles.input}
             type="text"
             value={otp}
-            name="phoneNumber"
+            name="otp"
             onChange={(event) => { setOtp(event.target.value) }}
           />
           <div style={{ width: '100%', display: "flex", justifyContent: 'space-evenly' }}>
@@ -245,6 +261,7 @@ const Vote = () => {
   }
 
   const otpSend = () => {
+    if (!phoneNumber && !phoneNumber.length === 10) return alert("Invalid phoneNumber");
     setLoader(true)
     onCaptchVerify();
     const appVerifier = window.recaptchaVerifier;
@@ -258,9 +275,15 @@ const Vote = () => {
         setShowOTP(true);
       })
       .catch((error) => {
-        // console.log(error);
-        // toast.error("Try again in some time");
+        console.log(error.code);
+        if (error.code === "auth/too-many-requests") {
+          toast.error("Too many requests!. Please try again later");
+          setShowPhoneverified(true)
+          setShowOTP(false);
+          setLoader(false);
+        }
         setLoader(false);
+        // toast.error("Try again in some time");
       });
 
   }
@@ -328,31 +351,50 @@ const Vote = () => {
           </div>
         </div>
       </div>
-      {!userRegistered && <UserDetail
+      {userRegistered && <UserDetail
         submit={handleUserDetails}
       />}
       {showOTP && verifyOtp()}
-      { voted && <div className={UD.glass}>
-        <div className={styles.pBox}  style={{width: "33%",marginTop:"20%"}}>
+      {voted && <div className={UD.glass}>
+        <div className={styles.pBox} style={{ width: "33%", marginTop: "20%" }}>
           <span> Your vote is saved successfully!!. </span>
           <Button variant="contained" onClick={() => { router.push("/home") }} >Go to Home</Button>
         </div>
       </div>
       }
-      { confirmVote && <div className={UD.glass}>
-        <div className={styles.pBox} style={{width: "33%",marginTop:"20%"}} >
+      {confirmVote && <div className={UD.glass}>
+        <div className={styles.pBox} style={{ width: "33%", marginTop: "20%" }} >
           <span> You choose "{candidateName}" as your candidate. Are you sure you wanna proceed?. </span>
-          <div style={{width: '100%',display: 'flex', justifyContent:"space-evenly"}} >
+          <div style={{ width: '100%', display: 'flex', justifyContent: "space-evenly" }} >
             <Button variant="contained" onClick={() => { setConfirmVote(false) }} >Change candidate</Button>
             <Button variant="contained" onClick={handleVoteSubmit} >Submit</Button>
           </div>
         </div>
       </div>}
+      {instruction && <Detail details={instructions} click={() => { setInstruction(false); setUserRegistered(true) }} />}
     </React.Fragment>
   )
 }
 
 export default Vote;
+
+
+
+const Detail = ({ details, click }) => {
+
+
+  return (
+    <div className={D.glass}>
+      <div className={D.container}>
+        <h1 className={D.topic}>{"instruction"}</h1>
+        {details && details.map((object, index) => {
+          return <p className={D.details} key={index} >{object}</p>;
+        })}
+        <Button variant="contained" sx={{ marginTop: "30px", marginBottom: "10px" }} onClick={click} color="primary" >Vote Now</Button>
+      </div>
+    </div>
+  );
+}
 
 
 
@@ -375,11 +417,11 @@ const UserDetail = ({ submit }) => {
   };
 
   const handleSubmit = () => {
-    if (fields.fullName !== "") {
-      if (fields.dob !== "") {
-        if (fields.gender !== "") {
-          if (fields.studentId !== "") {
-            if (fields.adharNo !== "") {
+    if (fields.fullName.trim !== "") {
+      if (fields.dob.trim !== "") {
+        if (fields.gender.trim !== "") {
+          if (fields.studentId.trim !== "") {
+            if (fields.adharNo.trim !== "" && fields.adharNo.length === 12) {
               if (fields.phoneNumber !== "" && fields.phoneNumber.length === 10) {
                 if (fields.age !== "" && +fields.age >= 16) {
                   return submit(fields)
@@ -393,7 +435,7 @@ const UserDetail = ({ submit }) => {
               }
             }
             else {
-              return alert("Please enter your adharNo")
+              return alert("Please enter valid adharNo")
             }
           }
           else {

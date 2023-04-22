@@ -43,8 +43,8 @@ const About = () => {
               Our online voting website provides a secure and convenient platform for organizations to conduct elections and polls. Our platform is designed to be user-friendly and accessible, allowing voters to cast their ballots quickly and easily from any device with an internet connection. With our advanced security measures, including two-factor authentication and encryption, we ensure the integrity and privacy of the voting process. Our platform also offers customizable options for administrators to set up and manage elections, including voter eligibility, candidate nomination, and result tabulation. With the use of otp login access to the voters we can ensure the security as one voter will be just allowed to vote once. The OTP will just be valid for a certain duration of the time and as the name says it is a one time password which can only be used once. This makes our webpage better than the EVM machines used right now for the voting purposes ,With the help of our website we will be able to prevent any kind of voting frauds like there will be no fake votes ,every vote will be counted and saved with the votes information which the previously developed machine cannot do, which makes our website better and more advantageous than them.Whether you are running a small school election or a large-scale corporate poll, our online voting website provides a simple, efficient, and secure solution for all your election needs.
             </span>
           </div>
-          <div className={H.footer} style={{marginTop:"5%"}} >
-            Contact us : pg900051@gmail.com
+          <div className={H.footer} >
+          <span style={{marginTop:"10px",marginBottom:"10px"}} >  Contact us : pg900051@gmail.com</span>
           </div>
         </div>
       </div>

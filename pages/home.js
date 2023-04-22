@@ -102,15 +102,15 @@ const Home = () => {
           <div className={H.bannerImg} style={{ height: "700px", marginTop: "100px", position: "relative" }}>
             <img src={bannerImg} style={{ height: "100%", width: "100%", objectFit: "cover" }} alt="" />
             <div className={H.bannerBox}>
-              <span style={{ fontSize: "20px", fontWeight: "bold", marginTop: "30px" }}>
-                Inclusive voting for all your fingerprint is your key
+              <span style={{ fontSize: "20px", fontWeight: "bold", marginTop: "30px",marginLeft: "20px" }}>
+              Be a part of the change you wish to see. Vote for your student representative.
               </span>
               <Button variant="contained" sx={{ marginTop: "20px", marginBottom: "30px" }} onClick={()=>{router.push("/vote")}} >VOTE</Button>
             </div>
           </div>
           {/* tagline */}
           <div className={H.tagLine}>
-            <span> Find the Power of Your Voice through Voting in the 2022 Election.
+            <span> Find the Power of Your Voice through Voting in the 2023 Election.
             </span>
           </div>
           {/* learn more block 1 */}

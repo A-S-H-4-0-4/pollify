@@ -65,13 +65,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 }
             });
             responseObject = {
-                errors: [],
+                message: "success",
                 data: { "data": result },
-                message: "success"
+                errors: []
             }
             res.status(HttpStatus.OK).json(responseObject)
         } catch (error) {
-            console.log(error);
             responseObject = {
                 message: "failed",
                 data: {},

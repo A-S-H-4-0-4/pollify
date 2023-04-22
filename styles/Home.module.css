@@ -15,6 +15,8 @@
   display: flex;
   flex-direction: column;
   scroll-behavior: smooth;
+  background-color: white;
+  overflow-x: hidden;
 }
 
 .navbar {
@@ -59,11 +61,11 @@
 
 .bannerBox {
   height: auto;
-  width: 50%;
+  width: 55%;
   background-color: #2791d4;
   position: absolute;
   top: 90%;
-  left: 25%;
+  left: 22%;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -113,13 +115,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
+  height: 50px !important;
   border-top: 1px solid #ccc;
   color: #2791d4;
-  font-size: 16px;
+  font-size: 18px;
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-weight: bold;
   letter-spacing: 0.5px;
+  margin-top: 30px;
 }
 
 .aboutBox {
@@ -128,7 +131,7 @@
   display: flex;
   flex-direction: column;
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
-  margin-top: 150px;
+  margin-top: 120px;
 }
 
 .aboutBox h1 {
