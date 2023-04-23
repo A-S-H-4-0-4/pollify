@@ -171,10 +171,35 @@ const Vote = () => {
   // to verify mobile no
   const verifyPhoneNumber = () => {
 
-    const handleOtp = () => {
+    const handleOtp = async () => {
       if (phoneNumber && phoneNumber.length === 10) {
-        otpSend();
-        setShowOTP(true);
+        const response = await callAPI(
+          `http://localhost:3000/api/user?phoneNumber=${phoneNumber}`
+        );
+        setLoader(false);
+        const { message, data, errors } = response;
+        if (message === "success") {
+          if (typeof data === "object") {
+            if (data["data"] !== null) {
+              toast.error("Vote have been submited already with this number.")
+            }
+            else {
+
+              onCaptchVerify();
+              otpSend();
+              setShowOTP(true);
+
+            }
+          }
+          else if (message === "failed") {
+
+          } else {
+            alert("Some Server error");
+          }
+        }
+      }
+      else{
+      alert("enter phone number agian")
       }
     }
     return (
@@ -199,7 +224,8 @@ const Vote = () => {
 
     const reSendOtp = () => {
       if (phoneNumber.trim != "" && phoneNumber.length === 10)
-        otpSend();
+        onCaptchVerify();
+      otpSend();
     }
     const handleOtp = () => {
       if (otp && otp.length === 6) {
@@ -211,7 +237,9 @@ const Vote = () => {
             setShowPhoneverified(false)
           })
           .catch((err) => {
+            console.log("a");
             console.log(err.code);
+            console.log("a");
             if (err.code === "auth/code-expired") { toast.error("Opt expired. Click on resend otp") }
             if (err.code === "auth/invalid-verification-code") {
               toast.error("Please enter correct otp")
@@ -251,7 +279,6 @@ const Vote = () => {
         {
           size: "invisible",
           callback: (response) => {
-            otpSend();
           },
           "expired-callback": () => { },
         },
@@ -263,7 +290,7 @@ const Vote = () => {
   const otpSend = () => {
     if (!phoneNumber && !phoneNumber.length === 10) return alert("Invalid phoneNumber");
     setLoader(true)
-    onCaptchVerify();
+
     const appVerifier = window.recaptchaVerifier;
     const ph = "+91" + phoneNumber;
     signInWithPhoneNumber(auth, ph, appVerifier)
@@ -275,7 +302,9 @@ const Vote = () => {
         setShowOTP(true);
       })
       .catch((error) => {
-        console.log(error.code);
+        console.log("a");
+        console.log(error);
+
         if (error.code === "auth/too-many-requests") {
           toast.error("Too many requests!. Please try again later");
           setShowPhoneverified(true)
@@ -362,7 +391,7 @@ const Vote = () => {
         </div>
       </div>
       }
-      {confirmVote ? selectedCandidateId!=null ? <div className={UD.glass}>
+      {confirmVote ? selectedCandidateId != null ? <div className={UD.glass}>
         <div className={styles.pBox} style={{ width: "33%", marginTop: "20%" }} >
           <span> You choose "{candidateName}" as your candidate. Are you sure you wanna proceed?. </span>
           <div style={{ width: '100%', display: 'flex', justifyContent: "space-evenly" }} >
@@ -371,16 +400,16 @@ const Vote = () => {
           </div>
         </div>
       </div>
-      :
-      <div className={UD.glass}>
-        <div className={styles.pBox} style={{ width: "33%", marginTop: "20%" }} >
-          <span> Select candidate first</span>
-          
+        :
+        <div className={UD.glass}>
+          <div className={styles.pBox} style={{ width: "33%", marginTop: "20%" }} >
+            <span> Select candidate first</span>
+
             <Button variant="contained" onClick={() => { setConfirmVote(false) }} >Ok</Button>
+          </div>
         </div>
-      </div>
-      :
-      <></>
+        :
+        <></>
       }
       {instruction && <Detail details={instructions} click={() => { setInstruction(false); setUserRegistered(true) }} />}
     </React.Fragment>
