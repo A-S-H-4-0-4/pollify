@@ -88,7 +88,7 @@ const Vote = () => {
   const handleUserDetails = async (fields) => {
     setLoader(true)
     const response = await callAPI(
-      `http://localhost:3000/api/user?phoneNumber=${fields.phoneNumber}`
+      `http://localhost:3000/api/user?phoneNumber=${fields.phoneNumber}&adharNo=${fields.adharNo}&studentId=${fields.studentId}`
     );
     setLoader(false);
     const { message, data, errors } = response;
@@ -362,7 +362,7 @@ const Vote = () => {
         </div>
       </div>
       }
-      {confirmVote && <div className={UD.glass}>
+      {confirmVote ? selectedCandidateId!=null ? <div className={UD.glass}>
         <div className={styles.pBox} style={{ width: "33%", marginTop: "20%" }} >
           <span> You choose "{candidateName}" as your candidate. Are you sure you wanna proceed?. </span>
           <div style={{ width: '100%', display: 'flex', justifyContent: "space-evenly" }} >
@@ -370,7 +370,18 @@ const Vote = () => {
             <Button variant="contained" onClick={handleVoteSubmit} >Submit</Button>
           </div>
         </div>
-      </div>}
+      </div>
+      :
+      <div className={UD.glass}>
+        <div className={styles.pBox} style={{ width: "33%", marginTop: "20%" }} >
+          <span> Select candidate first</span>
+          
+            <Button variant="contained" onClick={() => { setConfirmVote(false) }} >Ok</Button>
+        </div>
+      </div>
+      :
+      <></>
+      }
       {instruction && <Detail details={instructions} click={() => { setInstruction(false); setUserRegistered(true) }} />}
     </React.Fragment>
   )

@@ -8,18 +8,23 @@ interface ResponseType {
 }
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     const { method, body, query } = req;
-    const { phoneNumber } = query 
-    console.log(phoneNumber);
-    
+    const { phoneNumber, adharNo, studentId } = query
+
     if (method === "GET") {
         let responseObject: ResponseType;
         try {
             const result = await prisma.user.findFirst({
                 where: {
-                    phoneNumber: (phoneNumber === undefined || phoneNumber === null) ? "" : phoneNumber+"",
+                    OR: [
+                        { phoneNumber: (phoneNumber === undefined || phoneNumber === null) ? "" : phoneNumber + "", },
+                        { adharNo: (adharNo === undefined || adharNo === null) ? "" : adharNo + "", },
+                        { studentId: (studentId === undefined || studentId === null) ? "" : studentId + "", }
+                    ],
                 },
                 select: {
-                    phoneNumber: true
+                    phoneNumber: true,
+                    adharNo: true,
+                    studentId: true
                 }
             });
 
