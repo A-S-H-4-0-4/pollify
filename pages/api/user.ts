@@ -33,10 +33,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 data: { "data": result },
                 errors: [],
             };
-            console.log(result);
+            // console.log(result);
             res.status(HttpStatus.OK).json(responseObject);
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             responseObject = {
                 message: "failed",
                 data: {},

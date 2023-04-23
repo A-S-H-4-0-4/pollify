@@ -80,7 +80,7 @@ export const callAPI = async (API: string, params: object | null = null, method:
       case methods.GET:
         response = await instance.get(API);
         data = responseBody(response);
-        console.log(data);
+        // console.log(data);
         return data
 
       case methods.POST:
@@ -90,17 +90,17 @@ export const callAPI = async (API: string, params: object | null = null, method:
           }
         },);
         data = responseBody(response);
-        console.log(data);
+        // console.log(data);
         return data
       case methods.PUT:
         response = await instance.put(API, body);
         data = responseBody(response);
-        console.log(data);
+        // console.log(data);
         return data
       case methods.DELETE:
         response = await instance.delete(API);
         data = responseBody(response);
-        console.log(data);
+        // console.log(data);
         return data
       default:
         return { 'message': 'contactFailed', 'error': [{ "errorMessage": "Api Failed Alert" }] };
@@ -112,7 +112,7 @@ export const callAPI = async (API: string, params: object | null = null, method:
     // return result
 
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     
   }
 
