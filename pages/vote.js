@@ -182,10 +182,10 @@ const Vote = () => {
           if (typeof data === "object") {
             if (data["data"] !== null) {
               toast.error("Vote have been submited already with this number.")
+              console.log(data);
             }
             else {
 
-              onCaptchVerify();
               otpSend();
               setShowOTP(true);
 
@@ -198,8 +198,8 @@ const Vote = () => {
           }
         }
       }
-      else{
-      alert("enter phone number agian")
+      else {
+        alert("enter phone number agian")
       }
     }
     return (
@@ -224,7 +224,6 @@ const Vote = () => {
 
     const reSendOtp = () => {
       if (phoneNumber.trim != "" && phoneNumber.length === 10)
-        onCaptchVerify();
       otpSend();
     }
     const handleOtp = () => {
@@ -235,6 +234,7 @@ const Vote = () => {
             toast.success("Phone Number verified");
             setShowOTP(false);
             setShowPhoneverified(false)
+
           })
           .catch((err) => {
             console.log("a");
@@ -273,24 +273,25 @@ const Vote = () => {
   }
 
   const onCaptchVerify = () => {
-    if (!window.recaptchaVerifier) {
+
       window.recaptchaVerifier = new RecaptchaVerifier(
         "recaptcha-container",
         {
           size: "invisible",
           callback: (response) => {
+            otpSend()
           },
           "expired-callback": () => { },
         },
         auth
       );
     }
-  }
+  
 
   const otpSend = () => {
     if (!phoneNumber && !phoneNumber.length === 10) return alert("Invalid phoneNumber");
     setLoader(true)
-
+    onCaptchVerify();
     const appVerifier = window.recaptchaVerifier;
     const ph = "+91" + phoneNumber;
     signInWithPhoneNumber(auth, ph, appVerifier)
