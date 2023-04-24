@@ -224,7 +224,7 @@ const Vote = () => {
 
     const reSendOtp = () => {
       if (phoneNumber.trim != "" && phoneNumber.length === 10)
-      otpSend();
+        otpSend();
     }
     const handleOtp = () => {
       if (otp && otp.length === 6) {
@@ -274,19 +274,19 @@ const Vote = () => {
 
   const onCaptchVerify = () => {
 
-      window.recaptchaVerifier = new RecaptchaVerifier(
-        "recaptcha-container",
-        {
-          size: "invisible",
-          callback: (response) => {
-            otpSend()
-          },
-          "expired-callback": () => { },
+    window.recaptchaVerifier = new RecaptchaVerifier(
+      "recaptcha-container",
+      {
+        size: "invisible",
+        callback: (response) => {
+          otpSend()
         },
-        auth
-      );
-    }
-  
+        "expired-callback": () => { },
+      },
+      auth
+    );
+  }
+
 
   const otpSend = () => {
     if (!phoneNumber && !phoneNumber.length === 10) return alert("Invalid phoneNumber");
@@ -458,11 +458,11 @@ const UserDetail = ({ submit }) => {
   };
 
   const handleSubmit = () => {
-    if (fields.fullName.trim !== "") {
-      if (fields.dob.trim !== "") {
-        if (fields.gender.trim !== "") {
-          if (fields.studentId.trim !== "") {
-            if (fields.adharNo.trim !== "" && fields.adharNo.length === 12) {
+    if (fields.fullName.trim() !== "") {
+      if (fields.dob.trim() !== "") {
+        if (fields.gender.trim() !== "") {
+          if (fields.studentId.trim() !== "") {
+            if (fields.adharNo.trim() !== "" && fields.adharNo.length === 12) {
               if (fields.phoneNumber !== "" && fields.phoneNumber.length === 10) {
                 if (fields.age !== "" && +fields.age >= 16) {
                   return submit(fields)
