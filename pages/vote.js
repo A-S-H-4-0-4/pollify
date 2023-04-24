@@ -182,7 +182,7 @@ const Vote = () => {
           if (typeof data === "object") {
             if (data["data"] !== null) {
               toast.error("Vote have been submited already with this number.")
-              console.log(data);
+              // console.log(data);
             }
             else {
 
@@ -237,9 +237,9 @@ const Vote = () => {
 
           })
           .catch((err) => {
-            console.log("a");
-            console.log(err.code);
-            console.log("a");
+            // console.log("a");
+            // console.log(err);
+            // console.log("a");
             if (err.code === "auth/code-expired") { toast.error("Opt expired. Click on resend otp") }
             if (err.code === "auth/invalid-verification-code") {
               toast.error("Please enter correct otp")
@@ -303,8 +303,8 @@ const Vote = () => {
         setShowOTP(true);
       })
       .catch((error) => {
-        console.log("a");
-        console.log(error);
+        // console.log("a");
+        // console.log(error);
 
         if (error.code === "auth/too-many-requests") {
           toast.error("Too many requests!. Please try again later");
