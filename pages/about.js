@@ -34,6 +34,7 @@ const About = () => {
               {/* <span>Learn</span> */}
               <span style={{ color: "#2791d4" }} >About</span>
               <span onClick={() => { router.push("/vote") }}  >Vote</span>
+              <span onClick={()=>{router.push("/result")}} >Result</span>
             </div>
           </div>
           {/* about */}

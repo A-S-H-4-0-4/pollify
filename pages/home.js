@@ -96,6 +96,7 @@ const Home = () => {
               {/* <span>Learn</span> */}
               <span onClick={()=>{router.push("/about")}}>About</span>
               <span onClick={()=>{router.push("/vote")}} >Vote</span>
+              <span onClick={()=>{router.push("/result")}} >Result</span>
             </div>
           </div>
           {/* banner img */}

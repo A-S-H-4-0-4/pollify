@@ -337,8 +337,8 @@ const Vote = () => {
               <span onClick={() => { router.push("/home") }} >Home</span>
               {/* <span>Learn</span> */}
               <span onClick={() => { router.push("/about") }} >About</span>
-
               <span style={{ color: "#2791d4" }} >Vote</span>
+              <span onClick={()=>{router.push("/result")}} >Result</span>
             </div>
           </div>
           {/* vote */}
