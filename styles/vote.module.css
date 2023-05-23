@@ -62,6 +62,7 @@
 }
 
 .radio:checked+.image {
+  border: 6px solid #ccc;
   border-color: #0070f3;
 }
 
