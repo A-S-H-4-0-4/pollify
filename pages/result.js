@@ -76,7 +76,9 @@ const Result = () => {
           else if (countg > countm && countg > countn && counts < countg) {
             setCandidateName("Gaurav Soni")
           }
-
+        
+        
+          
 
         }
       }
@@ -120,7 +122,7 @@ const Result = () => {
             <div style={{ fontWeight:"bold",fontSize:"22px"}}><span>Siddhanth Pareek </span> <span>{siddhanthVote}</span> </div>
             <div style={{ fontWeight:"bold",fontSize:"22px"}}><span>Gaurav Soni</span> <span>{gauravVote}</span> </div>
           </div>
-          <div className={R.head} style={{color:"red"}} >The person who has height vote is <u style={{textTransform:"uppercase"}}>{candidateName}</u> </div>
+          { candidateName  != "" ?<div className={R.head} style={{color:"red"}} >The person who has heighest vote is <u style={{textTransform:"uppercase"}}>{candidateName}</u> </div> : <div className={R.head} style={{color:"red"}} > Multiple candidate have same number of votes </div> }
           <Button
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
